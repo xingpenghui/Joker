@@ -20,10 +20,9 @@ import java.util.List;
  */
 @Component
 public class JokerTask {
-
     @Autowired
     private JokerService jokerService;
-
+    //基于Spring Task 实现任务调度 定时任务
     @Scheduled(cron = "0/20 * 16 * * ?")
     public void downJoker(){
         String u="http://v.juhe.cn/joke/content/text.php?key=b12d46180eda262ec3a1cec558aa950e&page=1&pagesize=100";

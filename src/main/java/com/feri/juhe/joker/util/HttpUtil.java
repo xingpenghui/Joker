@@ -15,7 +15,6 @@ import java.net.URL;
  */
 public class HttpUtil {
     public static String getStr(String url){
-
         try {
             //1、创建连接对象
             URL myUrl=new URL(url);

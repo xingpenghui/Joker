@@ -18,8 +18,6 @@ public class JokerApplication {
     public static void main(String[] args) {
         SpringApplication.run(JokerApplication.class,args);
     }
-
-
     /**
      * 分页插件
      */

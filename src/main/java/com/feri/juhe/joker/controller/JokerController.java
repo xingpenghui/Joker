@@ -8,26 +8,32 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import java.math.BigInteger;
+import java.util.Date;
 
 @Api(value = "笑话大全",tags = "笑话大全")
 @RestController
 public class JokerController {
     @Autowired
     private JokerService jokerService;
-
     //新增
+    @CrossOrigin
     @ApiOperation(value = "新增",notes = "新增笑话")
     @PostMapping("/juhe/joker/save.do")
     public ResultBean save(@RequestBody Joker joker){
-       return ResultBean.exec(jokerService.save(joker),"新增");
+       joker.setUnixtime(BigInteger.valueOf(System.currentTimeMillis()/1000));
+       joker.setUpdatetime(new Date());
+        return ResultBean.exec(jokerService.save(joker),"新增");
     }
     //删除
+    @CrossOrigin
     @ApiOperation(value = "删除",notes = "删除笑话")
     @DeleteMapping("/juhe/joker/del/{id}")
     public ResultBean del(@PathVariable int id){
         return ResultBean.exec(jokerService.removeById(id),"删除");
     }
     //修改
+    @CrossOrigin
     @ApiOperation(value = "修改",notes = "修改笑话")
     @PutMapping("/juhe/joker/update.do")
     public ResultBean update(@RequestBody Joker joker){
@@ -40,12 +46,14 @@ public class JokerController {
         return ResultBean.setOK("OK",jokerService.list());
     }
     //查询详情
+    @CrossOrigin
     @ApiOperation(value = "查询详情",notes = "查询详情笑话")
     @GetMapping("/juhe/joker/detail/{id}")
     public ResultBean detail(@PathVariable int id){
         return ResultBean.setOK("OK",jokerService.getById(id));
     }
     //分页查询
+    @CrossOrigin
     @ApiOperation(value = "分页查询",notes = "分页查询笑话")
     @GetMapping("/juhe/joker/page/{page}/{count}")
     public ResultBean page(@PathVariable int page,@PathVariable int count){
